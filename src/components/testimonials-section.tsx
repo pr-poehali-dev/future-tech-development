@@ -3,25 +3,25 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const testimonials = [
   {
-    name: "Елена Родригес",
-    role: "Директор по нейронауке, Quantum Dynamics",
-    avatar: "/professional-woman-scientist.png",
-    content:
-      "SynapseAI изменил наш подход к нейрореабилитации. Результаты пациентов улучшились на 340% после внедрения.",
-  },
-  {
-    name: "Маркус Уильямс",
-    role: "Руководитель исследований, Stellar Analytics",
-    avatar: "/cybersecurity-expert-man.jpg",
-    content:
-      "Точность и протоколы безопасности не имеют аналогов. Мы значительно ускорили клинические испытания с платформой SynapseAI.",
-  },
-  {
-    name: "Анна Ковальски",
-    role: "Вице-президент по разработке, Nova Industries",
+    name: "Анна, 17 лет",
+    role: "Ниша: бьюти | Уровень: Блогер | 1 800 подписчиков",
     avatar: "/asian-woman-tech-developer.jpg",
     content:
-      "Интеграция прошла безупречно. Адаптивные алгоритмы понимают намерения пользователя лучше любой системы, что мы тестировали.",
+      "За первый месяц заработала $87 на заданиях от брендов косметики. AI сам подобрал задания под мой стиль — я просто делала то, что люблю.",
+  },
+  {
+    name: "Дима, 21 год",
+    role: "Ниша: спорт | Уровень: Блогер | 3 200 подписчиков",
+    avatar: "/cybersecurity-expert-man.jpg",
+    content:
+      "Думал, что для работы с брендами нужны сотни тысяч подписчиков. Оказалось — нет. Первое задание взял с 400 подписчиками и заработал $20 за день.",
+  },
+  {
+    name: "Маша, 19 лет",
+    role: "Ниша: мода | Уровень: Профи | 4 900 подписчиков",
+    avatar: "/professional-woman-scientist.png",
+    content:
+      "Creator Compass показал, что мне нужно постить чаще. Через месяц активности я перешла на уровень Профи — теперь доступны задания по $40–50.",
   },
 ]
 
@@ -30,9 +30,9 @@ export function TestimonialsSection() {
     <section className="py-24 px-6 bg-card">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-card-foreground mb-4 font-sans">Нам доверяют лидеры</h2>
+          <h2 className="text-4xl font-bold text-card-foreground mb-4 font-sans">Реальные истории роста</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Что говорят лидеры индустрии о нашей революционной технологии
+            Подростки и молодёжь, которые уже зарабатывают на своём контенте через LinkUp
           </p>
         </div>
 

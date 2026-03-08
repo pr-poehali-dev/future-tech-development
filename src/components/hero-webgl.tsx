@@ -2,6 +2,7 @@ import { Canvas, extend, useFrame } from "@react-three/fiber"
 import { useAspect, useTexture } from "@react-three/drei"
 import { useMemo, useRef, useState, useEffect } from "react"
 import * as THREE from "three"
+import { Button } from "@/components/ui/button"
 
 const TEXTUREMAP = { src: "https://i.postimg.cc/XYwvXN8D/img-4.png" }
 const DEPTHMAP = { src: "https://i.postimg.cc/2SHKQh2q/raw-4.webp" }
@@ -32,7 +33,6 @@ const Scene = () => {
       uniform float uTime;
       varying vec2 vUv;
 
-      // Simple noise function
       float random(vec2 st) {
         return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
       }
@@ -51,15 +51,12 @@ const Scene = () => {
       void main() {
         vec2 uv = vUv;
 
-        // Depth-based displacement
         float depth = texture2D(uDepthMap, uv).r;
         vec2 displacement = depth * uPointer * 0.01;
         vec2 distortedUv = uv + displacement;
 
-        // Base texture
         vec4 baseColor = texture2D(uTexture, distortedUv);
 
-        // Create scanning effect
         float aspect = ${WIDTH}.0 / ${HEIGHT}.0;
         vec2 tUv = vec2(uv.x * aspect, uv.y);
         vec2 tiling = vec2(120.0);
@@ -69,13 +66,10 @@ const Scene = () => {
         float dist = length(tiledUv);
         float dot = smoothstep(0.5, 0.49, dist) * brightness;
 
-        // Flow effect based on progress
         float flow = 1.0 - smoothstep(0.0, 0.02, abs(depth - uProgress));
 
-        // Red scanning overlay
-        vec3 mask = vec3(dot * flow * 10.0, 0.0, 0.0);
+        vec3 mask = vec3(dot * flow * 5.0, 0.0, dot * flow * 10.0);
 
-        // Combine effects
         vec3 final = baseColor.rgb + mask;
 
         gl_FragColor = vec4(final, 1.0);
@@ -114,10 +108,11 @@ const Scene = () => {
 }
 
 export const Hero3DWebGL = () => {
-  const titleWords = "Synapse AI".split(" ")
-  const subtitle = "Нейроинтерфейсы нового поколения."
+  const titleWords = "Link Up".split(" ")
+  const subtitle = "Операционная система для начинающих инфлюенсеров."
   const [visibleWords, setVisibleWords] = useState(0)
   const [subtitleVisible, setSubtitleVisible] = useState(false)
+  const [buttonsVisible, setButtonsVisible] = useState(false)
   const [delays, setDelays] = useState<number[]>([])
   const [subtitleDelay, setSubtitleDelay] = useState(0)
 
@@ -136,6 +131,13 @@ export const Hero3DWebGL = () => {
     }
   }, [visibleWords, titleWords.length])
 
+  useEffect(() => {
+    if (subtitleVisible) {
+      const timeout = setTimeout(() => setButtonsVisible(true), 600)
+      return () => clearTimeout(timeout)
+    }
+  }, [subtitleVisible])
+
   return (
     <div className="h-screen bg-black relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none z-10">
@@ -145,9 +147,9 @@ export const Hero3DWebGL = () => {
         <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-black to-transparent" />
       </div>
 
-      <div className="h-screen uppercase items-center w-full absolute z-[60] pointer-events-none px-10 flex justify-center flex-col">
+      <div className="h-screen uppercase items-center w-full absolute z-[60] pointer-events-none px-10 flex justify-center flex-col gap-6">
         <div className="text-3xl md:text-5xl xl:text-6xl 2xl:text-7xl font-extrabold font-orbitron">
-          <div className="flex space-x-2 lg:space-x-6 overflow-hidden text-white">
+          <div className="flex space-x-2 lg:space-x-6 overflow-hidden">
             {titleWords.map((word, index) => (
               <div
                 key={index}
@@ -155,6 +157,7 @@ export const Hero3DWebGL = () => {
                 style={{
                   animationDelay: `${index * 0.13 + (delays[index] || 0)}s`,
                   opacity: index < visibleWords ? undefined : 0,
+                  color: index === 1 ? "#7c3aed" : "white",
                 }}
               >
                 {word}
@@ -171,6 +174,44 @@ export const Hero3DWebGL = () => {
             }}
           >
             {subtitle}
+          </div>
+        </div>
+        <div
+          className={`flex flex-col sm:flex-row gap-4 pointer-events-auto normal-case ${buttonsVisible ? "fade-in-subtitle" : ""}`}
+          style={{ opacity: buttonsVisible ? undefined : 0 }}
+        >
+          <Button
+            size="lg"
+            className="bg-violet-600 hover:bg-violet-700 text-white text-lg px-8 border-0"
+          >
+            Начать зарабатывать
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="border-violet-500 text-violet-300 hover:bg-violet-600 hover:text-white text-lg px-8 bg-transparent"
+          >
+            Узнать больше
+          </Button>
+        </div>
+
+        <div
+          className={`flex gap-8 normal-case mt-4 ${buttonsVisible ? "fade-in-subtitle" : ""}`}
+          style={{ opacity: buttonsVisible ? undefined : 0 }}
+        >
+          <div className="text-center">
+            <div className="text-2xl font-bold text-violet-400 font-orbitron">$5–50</div>
+            <div className="text-xs text-gray-400 mt-1">за задание</div>
+          </div>
+          <div className="w-px bg-violet-500/30" />
+          <div className="text-center">
+            <div className="text-2xl font-bold text-violet-400 font-orbitron">от 100</div>
+            <div className="text-xs text-gray-400 mt-1">подписчиков</div>
+          </div>
+          <div className="w-px bg-violet-500/30" />
+          <div className="text-center">
+            <div className="text-2xl font-bold text-violet-400 font-orbitron">5 мин</div>
+            <div className="text-xs text-gray-400 mt-1">онбординг</div>
           </div>
         </div>
       </div>

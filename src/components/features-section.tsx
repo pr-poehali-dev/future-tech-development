@@ -1,53 +1,54 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import Icon from "@/components/ui/icon"
 
 const features = [
   {
-    title: "Адаптивная нейрообработка",
-    description: "Самооптимизирующиеся алгоритмы, которые обучаются на нейронных паттернах и улучшают интерпретацию сигналов.",
-    icon: "brain",
-    badge: "ИИ",
+    title: "AI-навигатор Creator Compass",
+    description: "Умный онбординг: AI сканирует твои соцсети, определяет нишу и строит персональную дорожную карту к первому заработку.",
+    icon: "Brain",
+    badge: "AI",
   },
   {
-    title: "Медицинская защита",
-    description: "Шифрование по стандартам FDA со сквозной защитой конфиденциальных нейронных данных.",
-    icon: "lock",
-    badge: "Сертификат",
+    title: "Маркетплейс BrandConnect",
+    description: "Биржа заданий от реальных брендов — фото, reels, stories. Доступна с 100 подписчиков. Оплата $5–50 за задание.",
+    icon: "Briefcase",
+    badge: "Заработок",
   },
   {
-    title: "Интуитивное управление",
-    description: "Естественная трансляция мыслей в действия с откликом менее миллисекунды и точностью 99,7%.",
-    icon: "globe",
-    badge: "Точность",
+    title: "Контент-студия CreatorLab",
+    description: "AI генерирует сценарии, подписи и хэштеги. Шаблоны автоматически добавляют логотип бренда — контент соответствует брифу с первого раза.",
+    icon: "Wand2",
+    badge: "Инструменты",
   },
   {
-    title: "Предиктивная калибровка",
-    description: "ML-модели, которые предугадывают намерения пользователя и оптимизируют нейронные пути.",
-    icon: "zap",
-    badge: "Умный",
+    title: "Академия Influencer School",
+    description: "Микро-уроки по 2–3 минуты в формате TikTok: алгоритмы, работа с брендами, юридические основы. Учишься — зарабатываешь XP.",
+    icon: "GraduationCap",
+    badge: "Обучение",
   },
   {
-    title: "Биометрическая интеграция",
-    description: "Бесшовная синхронизация с мониторингом жизненных показателей для контроля здоровья.",
-    icon: "link",
-    badge: "Связь",
+    title: "Аналитика InsightHub",
+    description: "Понятная статистика: заработок, рейтинг, уровень. AI прогнозирует доход на следующий месяц на основе твоей активности.",
+    icon: "BarChart3",
+    badge: "Аналитика",
   },
   {
-    title: "Поддержка XR",
-    description: "Нативная совместимость с AR/VR-средами для терапевтических и рабочих приложений.",
-    icon: "target",
-    badge: "XR Ready",
+    title: "Сообщество CreatorCircle",
+    description: "Лента успехов, вопросы другим создателям и командные задания для сложных кампаний. Расти быстрее вместе.",
+    icon: "Users",
+    badge: "Комьюнити",
   },
 ]
 
 export function FeaturesSection() {
   return (
-    <section className="py-24 px-6 bg-background">
+    <section id="features" className="py-24 px-6 bg-background">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4 font-sans">Возможности нового поколения</h2>
+          <h2 className="text-4xl font-bold text-foreground mb-4 font-sans">6 модулей. Один путь к доходу</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Почувствуйте будущее с технологиями, которые переопределяют возможное
+            Всё необходимое для старта карьеры в креативной экономике — в одном приложении
           </p>
         </div>
 
@@ -60,14 +61,7 @@ export function FeaturesSection() {
             >
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-3xl">
-                    {feature.icon === "brain" && "&#129504;"}
-                    {feature.icon === "lock" && "&#128274;"}
-                    {feature.icon === "globe" && "&#127760;"}
-                    {feature.icon === "zap" && "&#9889;"}
-                    {feature.icon === "link" && "&#128279;"}
-                    {feature.icon === "target" && "&#127919;"}
-                  </span>
+                  <Icon name={feature.icon} fallback="Star" size={32} className="text-violet-500" />
                   <Badge variant="secondary" className="bg-accent text-accent-foreground">
                     {feature.badge}
                   </Badge>
